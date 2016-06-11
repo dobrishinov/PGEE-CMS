@@ -110,7 +110,7 @@ $paginator->setBaseUrl("adminsListing.php?perPage={$pageResults}&orderBy={$order
                             </div>
 
                             <div class="col-md-2 col-md-offset-1">
-                                <a href="adminCreate.php" class="btn btn-primary btn">Create Admin</a>
+                                <a href="adminCreate.php" class="btn btn-primary btn">New Admin</a>
                             </div>
 
                         </div>

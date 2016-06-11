@@ -1,15 +1,82 @@
 <?php require_once 'common/header.php' ?>
+
+<?php
+
+$search = (isset($_GET['search'])) ? htmlspecialchars(trim($_GET['search'])) : '';
+
+
+$projectsCollection = new ProjectsCollection();
+
+//В тази променлива пазим броя резултати които искаме да върне заявката
+//$pageResults = (isset($_GET['perPage']))? (int)$_GET['perPage'] : 5;
+
+$pageResults = (isset($_GET['perPage'])) ? (int)$_GET['perPage'] : 0;
+switch ($pageResults) {
+    case 1:
+        $pageResults = 1;
+        break;
+    case 5:
+        $pageResults = 5;
+        break;
+    case 10:
+        $pageResults = 10;
+        break;
+    default:
+        $pageResults = 5;
+}
+
+//Филтър за подреждане по
+
+
+
+$orderBy = (isset($_GET['orderBy'])) ? (int)$_GET['orderBy'] : 0;
+switch ($orderBy) {
+    case 1:
+        $order = array('date', 'DESC');
+        break;
+    case 2:
+        $order = array('date', 'ASC');
+        break;
+    case 3:
+        $order = array('title', 'ASC');
+        break;
+    case 4:
+        $order = array('title', 'DESC');
+        break;
+    default:
+        $order = array('date', 'DESC');
+}
+
+
+//В променливата $page присвояваме гет параметъра, който се придава. Ако няма гет параметър то тогава слагаме 1.
+$page = (isset($_GET['page']) && (int)$_GET['page'] > 0)? (int)$_GET['page'] : 1;
+
+//В тази променлива изчисляваме от кой точно резултат да започне броенето в заявката.
+$offset = ($page-1)*$pageResults;
+
+$projects = $projectsCollection->get(array(), $offset, $pageResults, $search, $order, 'title');
+
+$totalRows = count($projectsCollection->get(array(), -1, 0, $search, $order, 'title'));
+$totalRows = ($totalRows == 0)? 1 : $totalRows;
+
+$paginator = new Pagination();
+$paginator->setPerPage($pageResults);
+$paginator->setTotalRows($totalRows);
+$paginator->setBaseUrl("projectsListing.php?perPage={$pageResults}&orderBy={$orderBy}&search={$search}");
+
+?>
+
 <?php require_once 'common/sidebar.php' ?>
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Projects</h2>
+            <h2>Blog</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="index.php">Admin</a>
                 </li>
                 <li class="active">
-                    <strong>Projects</strong>
+                    <strong>Blog</strong>
                 </li>
             </ol>
         </div>
@@ -18,16 +85,47 @@
     <div class="wrapper wrapper-content animated fadeInDown">
         <div class="ibox">
             <div class="ibox-title">
-                <div class="col-xs-6">
-                    <div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-sm btn-primary"> Go!</button>
-                        </span>
+
+                <form action="" method="get">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" value="<?php echo $search; ?>" placeholder="Search Projects">
+                                    <span class="input-group-btn">
+                                       <input type="submit" class="btn btn-primary" value="Go">
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <select class="form-control" name="orderBy" id="orderBy">
+                                <option value="1" <?php echo ($orderBy == 1)? 'selected': ''; ?>>Newest</option>
+                                <option value="2" <?php echo ($orderBy == 2)? 'selected': ''; ?>>Older</option>
+                                <option value="3" <?php echo ($orderBy == 3)? 'selected': ''; ?>>Name ascending</option>
+                                <option value="4" <?php echo ($orderBy == 4)? 'selected': ''; ?>>Name descending</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select class="form-control" name="perPage" id="perPage">
+                                <option value="1" <?php echo  ($pageResults == 1)? 'selected' : ''; ?>>1</option>
+                                <option value="5" <?php echo  ($pageResults == 5)? 'selected' : ''; ?>>5</option>
+                                <option value="10" <?php echo  ($pageResults == 10)? 'selected' : ''; ?>>10</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 col-md-offset-1">
+                            <a href="projectCreate.php" class="btn btn-primary btn">New Project</a>
+                        </div>
+
                     </div>
-                </div>
-                <div class="ibox-tools">
-                    <a href="projectCreate.php" class="btn btn-primary btn">Create new Project</a>
-                </div>
+
+                </form>
+
+                <br>
+
             </div>
             <div class="ibox-content">
 
@@ -35,62 +133,35 @@
 
                     <table class="table table-hover">
                         <tbody>
-                        <tr>
-                            <td class="project-status">
-                                <span class="label label-primary">Active</span>
-                            </td>
-                            <td class="col-md-3">
-                                <a href="project_detail.html">Contract with Zender Company</a>
-                                <br>
-                                <small>Created 14.08.2014</small>
-                            </td>
-                            <td colspan="2" class="col-md-5">
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aut culpa doloribus eaque eius hic id incidunt ipsum maxime molestias non odio possimus, provident repudiandae sequi, sit, soluta unde ut.
-                            </td>
-                            <td class="project-actions">
-                                <a href="projectView.php" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View </a>
-                                <a href="projectEdit.php" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                <a href="projectDelete.php" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> Delete </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="project-status">
-                                <span class="label label-primary">Active</span>
-                            </td>
-                            <td class="col-md-3">
-                                <a href="project_detail.html">Contract with Zender Company</a>
-                                <br>
-                                <small>Created 14.08.2014</small>
-                            </td>
-                            <td colspan="2" class="col-md-5">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aut culpa doloribus eaque eius hic id incidunt ipsum maxime molestias non odio possimus, provident repudiandae sequi, sit, soluta unde ut.
-                            </td>
-                            <td class="project-actions">
-                                <a href="#" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View </a>
-                                <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                <a href="#" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> Delete </a>
-                            </td>
-                        </tr>
+                        <?php foreach($projects as $project) { ?>
+                            <tr>
+                                <td class="project-status">
+                                    <span class="label label-primary"><?php echo $project->getCategoryName(); ?></span>
+                                </td>
+                                <td class="col-md-3">
+                                    <a href="projectView.php?id=<?php echo $project->getId();?>"><?php echo $project->getTitle(); ?></a>
+                                    <br>
+                                    <small>Created <?php echo $project->getDate(); ?></small>
+                                    <br>
+                                    <small>by <?php echo $project->getAuthorName();?></small>
+                                </td>
+                                <td colspan="2" class="col-md-5">
+                                    <?php echo $project->getDescription();?>
+                                </td>
+                                <td class="project-actions">
+                                    <a href="projectView.php?id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View </a>
+                                    <a href="projectEdit.php?id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="projectDelete.php?id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> Delete </a>
+                                </td>
+                            </tr>
+                        <?php }  ?>
                         </tbody>
                     </table>
 
                     <div class="text-center">
-                        <nav>
-                            <ul class="pagination">
-                                <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <?php echo $paginator->create(); ?>
                     </div>
+
                 </div>
             </div>
         </div>

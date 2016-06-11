@@ -1,14 +1,16 @@
 <?php
 
-class TourEntity extends Entity
+class ProjectEntity extends Entity
 {
     private $id;
-    private $name;
+    private $title;
     private $description;
-    private $image;
+    private $content;
+    private $date;
+    private $authorId;
+    private $authorName;
     private $categoryId;
     private $categoryName;
-
 
     /**
      * @return mixed
@@ -29,17 +31,17 @@ class TourEntity extends Entity
     /**
      * @return mixed
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $title
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
     }
 
     /**
@@ -61,17 +63,65 @@ class TourEntity extends Entity
     /**
      * @return mixed
      */
-    public function getImage()
+    public function getContent()
     {
-        return $this->image;
+        return $this->content;
     }
 
     /**
-     * @param mixed $image
+     * @param mixed $content
      */
-    public function setImage($image)
+    public function setContent($content)
     {
-        $this->image = $image;
+        $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
+
+    /**
+     * @param mixed $authorId
+     */
+    public function setAuthorId($authorId)
+    {
+        $this->authorId = $authorId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorName()
+    {
+        return $this->authorName;
+    }
+
+    /**
+     * @param mixed $authorName
+     */
+    public function setAuthorName($authorName)
+    {
+        $this->authorName = $authorName;
     }
 
     /**
@@ -106,5 +156,5 @@ class TourEntity extends Entity
         $this->categoryName = $categoryName;
     }
 
-    
+
 }

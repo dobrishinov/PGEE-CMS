@@ -117,7 +117,7 @@ $paginator->setBaseUrl("postsListing.php?perPage={$pageResults}&orderBy={$orderB
                         </div>
 
                         <div class="col-md-2 col-md-offset-1">
-                            <a href="postCreate.php" class="btn btn-primary btn">Create new Post</a>
+                            <a href="postCreate.php" class="btn btn-primary btn">New Post</a>
                         </div>
 
                     </div>
@@ -139,7 +139,7 @@ $paginator->setBaseUrl("postsListing.php?perPage={$pageResults}&orderBy={$orderB
                                         <span class="label label-primary"><?php echo $post->getCategoryName(); ?></span>
                                     </td>
                                     <td class="col-md-3">
-                                        <postView.php?id=<?php echo $post->getId();?>"><?php echo $post->getTitle(); ?></a>
+                                        <a href="postView.php?id=<?php echo $post->getId(); ?>"><?php echo $post->getTitle(); ?></a>
                                         <br>
                                         <small>Created <?php echo $post->getDate(); ?></small>
                                         <br>

@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     if (empty($errors)) {
         $entity = new PostEntity();
         $entity->init($data);
-        
+
         $postsCollection = new PostsCollection();
 
         $postsCollection->save($entity);
@@ -159,7 +159,7 @@ if (isset($_POST['submit'])) {
 
                         <hr class="hr-line-dashed">
 
-                        <input class="btn btn-primary pull-right" type="submit" name="submit" value="Save Project">
+                        <input class="btn btn-primary pull-right" type="submit" name="submit" value="Save Post">
 
                     </form>
                 </fieldset>

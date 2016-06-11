@@ -3,8 +3,8 @@
 <?php
 
 
-//$projectsCollection = new ProjectsCollection();
-//$projects = count($postsCollection->get(array(), 0, -1, null, null, $column='title'));
+$projectsCollection = new ProjectsCollection();
+$projects = count($projectsCollection->get(array(), 0, -1, null, null, $column='title'));
 
 $postsCollection = new PostsCollection();
 $posts = count($postsCollection->get(array(), 0, -1, null, null, $column='title'));
@@ -41,7 +41,7 @@ $users = count($postsCollection->get(array(), 0, -1, null, null, $column='userna
                     <h5><i class="fa fa-flask"></i> Projects</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php //echo $projects; ?></h1>
+                    <h1 class="no-margins"><?php echo $projects; ?></h1>
                     <div class="stat-percent font-bold"><a class="text-navy" href="projectsListing.php">View all</a></div>
                     <small>Total projects</small>
                 </div>

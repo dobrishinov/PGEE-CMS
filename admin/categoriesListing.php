@@ -110,7 +110,7 @@ $paginator->setBaseUrl("categoriesListing.php?perPage={$pageResults}&orderBy={$o
                             </div>
 
                             <div class="col-md-2 col-md-offset-1">
-                                <a href="categoryCreate.php" class="btn btn-primary btn">Create Admin</a>
+                                <a href="categoryCreate.php" class="btn btn-primary btn">New Category</a>
                             </div>
 
                         </div>

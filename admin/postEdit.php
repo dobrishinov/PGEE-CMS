@@ -172,7 +172,7 @@ if (isset($_POST['submit'])) {
 
                         <hr class="hr-line-dashed">
 
-                        <input class="btn btn-primary pull-right" type="submit" name="submit" value="Save Project">
+                        <input class="btn btn-primary pull-right" type="submit" name="submit" value="Save Post">
 
                     </form>
                 </fieldset>

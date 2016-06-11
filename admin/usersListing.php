@@ -109,7 +109,7 @@ $paginator->setBaseUrl("usersListing.php?perPage={$pageResults}&orderBy={$orderB
                             </div>
 
                             <div class="col-md-2 col-md-offset-1">
-                                <a href="userCreate.php" class="btn btn-primary btn">Create User</a>
+                                <a href="userCreate.php" class="btn btn-primary btn">New User</a>
                             </div>
 
                         </div>
