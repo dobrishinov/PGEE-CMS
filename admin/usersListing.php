@@ -46,9 +46,9 @@ $page = (isset($_GET['page']) && (int)$_GET['page'] > 0)? (int)$_GET['page'] : 1
 //В тази променлива изчисляваме от кой точно резултат да започне броенето в заявката.
 $offset = ($page-1)*$pageResults;
 
-$users = $usersCollection->get(array(), $offset, $pageResults, $search, $order);
+$users = $usersCollection->get(array(), $offset, $pageResults, $search, $order, 'username');
 
-$totalRows = count($usersCollection->get(array(), -1, 0, $search));
+$totalRows = count($usersCollection->get(array(), -1, 0, $search, $order, 'username'));
 $totalRows = ($totalRows == 0)? 1 : $totalRows;
 
 $paginator = new Pagination();

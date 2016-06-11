@@ -9,10 +9,10 @@ $postsCollection = new PostsCollection();
 $post = $postsCollection->getOne($_GET['id']);
 
 $categoriesCollection = new CategoriesCollection();
-$categories = $categoriesCollection->getSelect();
+$categories = $categoriesCollection->get($_GET['id'], NULL, NULL, NULL, NULL, NULL);
 
 $authorCollection = new AdminsCollection();
-$authors = $authorCollection->getSelect();
+$authors = $authorCollection->get($_GET['id'], NULL, NULL, NULL, NULL, NULL);
 
 
 if (empty($post)) {

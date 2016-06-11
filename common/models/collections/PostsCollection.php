@@ -8,7 +8,7 @@ class PostsCollection extends Collection
     public function save(Entity $entity)
     {
         $data = array(
-            //'id'       => $entity->getId(),
+            'id'       => $entity->getId(),
             'title'    => $entity->getTitle(),
             'description'    => $entity->getDescription(),
             'content'    => $entity->getContent(),
@@ -24,7 +24,7 @@ class PostsCollection extends Collection
         }
     }
 
-    public function get($where = array(), $limit = -1, $offset = 0, $like, $orderBy = array())
+    public function get($where = array(), $limit = -1, $offset = 0, $like, $orderBy = array(), $column = ' ')
     {
         $sql = "SELECT
                 t.id, t.title, t.description, t.date,
@@ -42,7 +42,7 @@ class PostsCollection extends Collection
             }
         }
 
-        $sql .= " WHERE title LIKE '%{$like}%' ";
+        $sql .= " WHERE {$column} LIKE '%{$like}%' ";
 
         if (!empty($orderBy)){
             $sql .= " ORDER BY {$orderBy[0]} {$orderBy[1]} ";

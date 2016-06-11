@@ -2,11 +2,18 @@
 
 <?php
 
-$db = DB::getInstance();
-$projects = count($db->get('projects'));
-$posts = count($db->get('posts'));
-$categories = count($db->get('categories'));
-$users = count($db->get('users'));
+
+//$projectsCollection = new ProjectsCollection();
+//$projects = count($postsCollection->get(array(), 0, -1, null, null, $column='title'));
+
+$postsCollection = new PostsCollection();
+$posts = count($postsCollection->get(array(), 0, -1, null, null, $column='title'));
+
+$categoriesCollection = new CategoriesCollection();
+$categories = count($categoriesCollection->get(array(), 0, -1, null, null, $column='name'));
+
+$usersCollection = new UsersCollection();
+$users = count($postsCollection->get(array(), 0, -1, null, null, $column='username'));
 
 ?>
 
@@ -34,7 +41,7 @@ $users = count($db->get('users'));
                     <h5><i class="fa fa-flask"></i> Projects</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $projects?></h1>
+                    <h1 class="no-margins"><?php //echo $projects; ?></h1>
                     <div class="stat-percent font-bold"><a class="text-navy" href="projectsListing.php">View all</a></div>
                     <small>Total projects</small>
                 </div>
@@ -46,7 +53,7 @@ $users = count($db->get('users'));
                     <h5><i class="fa fa-newspaper-o"></i> Blog Posts</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $posts?></h1>
+                    <h1 class="no-margins"><?php echo $posts;?></h1>
                     <div class="stat-percent font-bold text-navy"><a class="text-navy" href="postsListing.php">View all</a></div>
                     <small>Total posts</small>
                 </div>
@@ -58,7 +65,7 @@ $users = count($db->get('users'));
                     <h5><i class="fa fa-tags"></i> Categories</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $categories?></h1>
+                    <h1 class="no-margins"><?php echo $categories; ?></h1>
                     <div class="stat-percent font-bold text-navy"><a class="text-navy" href="categoriesListing.php">View all</a></div>
                     <small>Total categories</small>
                 </div>

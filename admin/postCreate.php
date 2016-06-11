@@ -1,17 +1,17 @@
 <?php require_once 'common/header.php' ?>
 
 <?php
-$db = DB::getInstance();
-$categories = $db->get('categories');
-$admins = $db->get('admins');
-?>
 
-<?php
+$categoriesCollection = new CategoriesCollection();
+$categories = $categoriesCollection->get(1, NULL, NULL, NULL, NULL, NULL);
+$authorCollection = new AdminsCollection();
+$authors = $authorCollection->get(1, NULL, NULL, NULL, NULL, NULL);
+
 $data = array(
     'title'          => '',
     'description'    => '',
-    'category_id'    => '',
-    'author_id'      => '',
+    'categoryName'    => '',
+    'authorName'      => '',
     'date'           => '',
     'content'        => '',
     );
@@ -24,11 +24,11 @@ if (isset($_POST['submit'])) {
     if(strlen(trim($_POST['description'])) < 8 || strlen(trim($_POST['description'])) > 255) {
         $errors['description'] = 'Invalid description length (8 symbols required)';
     }
-    if(strlen(trim($_POST['category_id'])) == 0) {
-        $errors['category_id'] = 'Invalid category';
+    if(strlen(trim($_POST['categoryName'])) == 0) {
+        $errors['categoryName'] = 'Invalid category';
     }
-    if(strlen(trim($_POST['author_id'])) == 0) {
-        $errors['author_id'] = 'Invalid author';
+    if(strlen(trim($_POST['authorName'])) == 0) {
+        $errors['authorName'] = 'Invalid author';
     }
     if(strlen(trim($_POST['date'])) == 0) {
         $errors['date'] = 'Invalid date';
@@ -38,16 +38,22 @@ if (isset($_POST['submit'])) {
     }
 
     $data = array(
-        'title'         => trim($_POST['title']),
-        'description'   => trim($_POST['description']),
-        'category_id'   => trim($_POST['category_id']),
-        'author_id'     => trim($_POST['author_id']),
-        'date'          => trim($_POST['date']),
+        'title'         => htmlspecialchars(trim($_POST['title'])),
+        'description'   => htmlspecialchars(trim($_POST['description'])),
+        'categoryName'   => htmlspecialchars(trim($_POST['categoryName'])),
+        'authorName'     => htmlspecialchars(trim($_POST['authorName'])),
+        'date'          => htmlspecialchars(trim($_POST['date'])),
         'content'       => htmlspecialchars(trim($_POST['content'])),
     );
 
     if (empty($errors)) {
-        $db->insert('posts', $data);
+        $entity = new PostEntity();
+        $entity->init($data);
+        
+        $postsCollection = new PostsCollection();
+
+        $postsCollection->save($entity);
+
         header('Location: postsListing.php');
     }
 }
@@ -99,36 +105,36 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
 
-                        <div class="form-group <?php echo (array_key_exists('category_id', $errors))? 'has-error' : ''; ?>">
+                        <div class="form-group <?php echo (array_key_exists('categoryName', $errors))? 'has-error' : ''; ?>">
                             <label class="col-sm-2 control-label">Category:</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="category_id" id="category">
+                                <select class="form-control" name="categoryName" id="category">
                                     <option value="">Select Category</option>
                                     <?php foreach($categories as $category) { ?>
-                                        <option value="<?php echo  $category['id']; ?>">
-                                            <?php echo $category['name']; ?>
+                                        <option value="<?php echo  $category->getId(); ?>">
+                                            <?php echo $category->getName(); ?>
                                         </option>
                                     <?php } ?>
                                 </select>
                                 <span class="help-block m-b-none">
-                                    <?php echo (array_key_exists('category_id', $errors))? $errors['category_id'] : ''; ?>
+                                    <?php echo (array_key_exists('categoryName', $errors))? $errors['categoryName'] : ''; ?>
                                 </span>
                             </div>
                         </div>
 
-                        <div class="form-group <?php echo (array_key_exists('author_id', $errors))? 'has-error' : ''; ?>">
+                        <div class="form-group <?php echo (array_key_exists('authorName', $errors))? 'has-error' : ''; ?>">
                             <label class="col-sm-2 control-label">Author:</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="author_id" id="author">
+                                <select class="form-control" name="authorName" id="author">
                                     <option value="">Select Author</option>
-                                    <?php foreach($admins as $admin) { ?>
-                                        <option value="<?php echo  $admin['id']; ?>">
-                                            <?php echo $admin['username']; ?>
+                                    <?php foreach($authors as $author) { ?>
+                                        <option value="<?php echo  $author->getId(); ?>">
+                                            <?php echo $author->getUsername(); ?>
                                         </option>
                                     <?php } ?>
                                 </select>
                                 <span class="help-block m-b-none">
-                                    <?php echo (array_key_exists('author_id', $errors))? $errors['author_id'] : ''; ?>
+                                    <?php echo (array_key_exists('authorName', $errors))? $errors['authorName'] : ''; ?>
                                 </span>
                             </div>
                         </div>
