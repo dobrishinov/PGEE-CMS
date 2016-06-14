@@ -3143,6 +3143,8 @@ body.tour-open .animated {
   margin: 10px;
   float: left;
   overflow: hidden;
+  min-height: 150px;
+  min-width: 150px;
 }
 .resizable-panels .ibox .ibox-content {
   height: calc(100% - 49px);
@@ -4460,6 +4462,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   font-weight: 800;
   letter-spacing: -10px;
   margin-bottom: 0;
+  margin-left: -50px;
 }
 .middle-box h1 {
   font-size: 170px;
@@ -8224,13 +8227,4 @@ body.md-skin {
   #page-wrapper {
     margin: 0;
   }
-}
-.blog-h1 {
-  font-size: 48px;
-  font-weight: 700;
-  color: #2F4050;
-}
-a {
-  color: #149077;
-  text-decoration: none;
 }

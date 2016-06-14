@@ -8,12 +8,12 @@ class UsersCollection extends Collection
     public function save(Entity $entity)
     {
         $data = array(
-            'username' => $entity->getUsername(),
-            'full_name' => $entity->getFullName(),
-            'interests' => $entity->getInterests(),
-            'phone' => $entity->getPhone(),
-            'email' => $entity->getEmail(),
-            'address' => $entity->getAddress(),
+            'username'  => $this->db->escape($entity->getUsername()),
+            'full_name' => $this->db->escape($entity->getFullName()),
+            'interests' => $this->db->escape($entity->getInterests()),
+            'phone'     => $this->db->escape($entity->getPhone()),
+            'email'     => $this->db->escape($entity->getEmail()),
+            'address'   => $this->db->escape($entity->getAddress()),
         );
 
         if ($entity->getId() != null) {

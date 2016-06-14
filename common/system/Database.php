@@ -41,6 +41,10 @@ class Database
     }
 
 
+    public function escape($sql){
+        return mysqli_real_escape_string($this->connection, $sql);
+    }
+    
     public function query($sql)
     {
         return mysqli_query($this->connection, $sql);

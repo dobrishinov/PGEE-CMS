@@ -8,13 +8,13 @@ class ProjectsCollection extends Collection
     public function save(Entity $entity)
     {
         $data = array(
-            'id'       => $entity->getId(),
-            'title'    => $entity->getTitle(),
-            'description'    => $entity->getDescription(),
-            'content'    => $entity->getContent(),
-            'date'    => $entity->getDate(),
-            'author_id'    => $entity->getAuthorName(),
-            'category_id'    => $entity->getCategoryName(),
+            'id'            => $this->db->escape($entity->getId()),
+            'title'         => $this->db->escape($entity->getTitle()),
+            'description'   => $this->db->escape($entity->getDescription()),
+            'content'       => $this->db->escape($entity->getContent()),
+            'date'          => $this->db->escape($entity->getDate()),
+            'author_id'     => $this->db->escape($entity->getAuthorName()),
+            'category_id'   => $this->db->escape($entity->getCategoryName()),
         );
 
         if ($entity->getId() != null) {

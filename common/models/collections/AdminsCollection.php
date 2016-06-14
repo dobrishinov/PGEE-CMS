@@ -8,11 +8,11 @@ class AdminsCollection extends Collection
     public function save(Entity $entity)
     {
         $data = array(
-            'username'    => $entity->getUsername(),
-            'full_name'    => $entity->getFullName(),
-            'information' => $entity->getInformation(),
-            'phone'       => $entity->getPhone(),
-            'email'       => $entity->getEmail(),
+            'username'    => $this->db->escape($entity->getUsername()),
+            'full_name'   => $this->db->escape($entity->getFullName()),
+            'information' => $this->db->escape($entity->getInformation()),
+            'phone'       => $this->db->escape($entity->getPhone()),
+            'email'       => $this->db->escape($entity->getEmail()),
         );
 
         if ($entity->getId() != null) {

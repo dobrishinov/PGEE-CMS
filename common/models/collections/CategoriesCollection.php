@@ -8,8 +8,8 @@ class CategoriesCollection extends Collection
     public function save(Entity $entity)
     {
         $data = array(
-            'name'    => $entity->getName(),
-            'description'    => $entity->getDescription(),
+            'name'          => $this->db->escape($entity->getName()),
+            'description'   => $this->db->escape($entity->getDescription()),
         );
 
         if ($entity->getId() != null) {
