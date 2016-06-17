@@ -8228,3 +8228,12 @@ body.md-skin {
     margin: 0;
   }
 }
+.blog-h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2F4050;
+}
+a {
+  color: #149077;
+  text-decoration: none;
+}

@@ -19,25 +19,25 @@
                     </div>
                 </li>
 
-                <?php $activePage = basename($_SERVER['PHP_SELF'], ".php"); ?>
+                <?php $activePage = basename($_SERVER['REQUEST_URI']); ?>
 
-                <li class="<?php echo ($activePage == 'index')? 'active' : ''; ?>">
+                <li class="<?php echo ($activePage == 'index.php')? 'active' : ''; ?>">
                     <a href="index.php"><i class="fa fa-desktop"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
-                <li class="<?php echo ($activePage == 'categoriesListing')? 'active' : ''; ?>">
-                    <a href="categoriesListing.php"><i class="fa fa-tags"></i> <span class="nav-label">Categories</span> </a>
+                <li class="<?php echo ($activePage == 'index.php?c=categories')? 'active' : ''; ?>">
+                    <a href="index.php?c=categories"><i class="fa fa-tags"></i> <span class="nav-label">Categories</span> </a>
                 </li>
-                <li class="<?php echo ($activePage == 'projectsListing')? 'active' : ''; ?>">
-                    <a href="projectsListing.php"><i class="fa fa-flask"></i> <span class="nav-label">Projects</span> </a>
+                <li class="<?php echo ($activePage == 'index.php?c=projects')? 'active' : ''; ?>">
+                    <a href="index.php?c=projects"><i class="fa fa-flask"></i> <span class="nav-label">Projects</span> </a>
                 </li>
-                <li class="<?php echo ($activePage == 'postsListing')? 'active' : ''; ?>">
-                    <a href="postsListing.php"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Blog</span> </a>
+                <li class="<?php echo ($activePage == 'index.php?c=posts')? 'active' : ''; ?>">
+                    <a href="index.php?c=posts"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Blog</span> </a>
                 </li>
-                <li class="<?php echo ($activePage == 'usersListing')? 'active' : ''; ?>">
-                    <a href="usersListing.php"><i class="fa fa-users"></i> <span class="nav-label">Users</span> </a>
+                <li class="<?php echo ($activePage == 'index.php?c=users')? 'active' : ''; ?>">
+                    <a href="index.php?c=users"><i class="fa fa-users"></i> <span class="nav-label">Users</span> </a>
                 </li>
-                <li class="<?php echo ($activePage == 'adminsListing')? 'active' : ''; ?>">
-                    <a href="adminsListing.php"><i class="fa fa-beer"></i> <span class="nav-label">Admins</span> </a>
+                <li class="<?php echo ($activePage == 'index.php?c=admins')? 'active' : ''; ?>">
+                    <a href="index.php?c=admins"><i class="fa fa-beer"></i> <span class="nav-label">Admins</span> </a>
                 </li>
             </ul>
 

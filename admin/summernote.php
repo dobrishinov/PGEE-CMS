@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<form class="span12" id="postForm" action="summernote.php" method="POST" enctype="multipart/form-data" onsubmit="return postForm()">
+		<form class="span12" id="postForm" action="summernote.php" method="get" enctype="multipart/form-data" onsubmit="return postForm()">
 			<fieldset>
 				<legend>Make Post</legend>
 				<p class="container"><textarea class="input-block-level" id="summernote" name="content" rows="18"></textarea>

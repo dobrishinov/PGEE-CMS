@@ -1,89 +1,64 @@
-<?php require_once 'common/header.php' ?>
-
 <?php
+session_start();
 
+function __autoload($className)
+{
+    //Zaredi papka entities ako e entity
+    //Zaredi papka collections ako e kolekciq
+    //Zaredi papka system ako ne e nito kolekciq nito entity
 
-$projectsCollection = new ProjectsCollection();
-$projects = count($projectsCollection->get(array(), 0, -1, null, null, $column='title'));
+    if (strpos($className, 'Collection') > 0) {
+        $path = __DIR__.'/../common/models/collections/' . $className . '.php';
+    } elseif (strpos($className, 'Entity') > 0) {
+        $path = __DIR__.'/../common/models/entities/' . $className . '.php';
+    } elseif (strpos($className, 'Controller') > 0) {
+        $path = __DIR__.'/../common/controllers/admin/' . $className . '.php';
+    } else {
+        $path = __DIR__.'/../common/system/' . $className . '.php';
+    }
+    if(is_file($path)&&!class_exists($path)) {
+        require_once $path;
+    }
 
-$postsCollection = new PostsCollection();
-$posts = count($postsCollection->get(array(), 0, -1, null, null, $column='title'));
+}
 
-$categoriesCollection = new CategoriesCollection();
-$categories = count($categoriesCollection->get(array(), 0, -1, null, null, $column='name'));
+    /*
+     *
+     * CONTROLLER AND METHOD ESCAPE, VALIDATION
+     *
+     */
+    $controller = (isset($_GET['c'])) ? $_GET['c'] : 'dashboard';
+    $method     = (isset($_GET['m'])) ? $_GET['m'] : 'index';
+    
+    if ($controller != 'dashboard' &&
+        $controller != 'categories' &&
+        $controller != 'projects' &&
+        $controller != 'posts' &&
+        $controller != 'users' &&
+        $controller != 'admins' &&
+        $controller != 'error') {
 
-$usersCollection = new UsersCollection();
-$users = count($postsCollection->get(array(), 0, -1, null, null, $column='username'));
+        header('Location: index.php?c=error');
+        echo 'Controller with this name not exist!'; die;
+    
+    } else {
+        $controllerName = ucfirst($controller) . 'Controller';
+    }
+    
+    if (class_exists($controllerName)) {
+        $controller = new $controllerName();
+    
+        if ($method != 'index' &&
+            $method != 'insert' &&
+            $method != 'update' &&
+            $method != 'delete' &&
+            $method != 'preview') {
 
-?>
-
-<?php require_once 'common/sidebar.php' ?>
-
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Dashboard</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="index.php">Admin</a>
-                </li>
-                <li class="active">
-                    <strong>Dashboard</strong>
-                </li>
-            </ol>
-        </div>
-    </div>
-
-<div class="wrapper wrapper-content animated fadeInDown">
-    <div class="row">
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><i class="fa fa-flask"></i> Projects</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $projects; ?></h1>
-                    <div class="stat-percent font-bold"><a class="text-navy" href="projectsListing.php">View all</a></div>
-                    <small>Total projects</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><i class="fa fa-newspaper-o"></i> Blog Posts</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $posts;?></h1>
-                    <div class="stat-percent font-bold text-navy"><a class="text-navy" href="postsListing.php">View all</a></div>
-                    <small>Total posts</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><i class="fa fa-tags"></i> Categories</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $categories; ?></h1>
-                    <div class="stat-percent font-bold text-navy"><a class="text-navy" href="categoriesListing.php">View all</a></div>
-                    <small>Total categories</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><i class="fa fa-users"></i> Users</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $users?></h1>
-                    <div class="stat-percent font-bold text-danger"><a class="text-navy" href="usersListing.php">View all</a></div>
-                    <small>Total Users</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php require_once 'common/footer.php' ?>
+            header('Location: index.php?c=error');
+            echo 'Method with this name not exist!'; die;
+    
+        } else {
+            $controller->$method();
+        }
+        
+    }

@@ -40,9 +40,10 @@ class PostsCollection extends Collection
             foreach ($where as $key => $value) {
                 $sql.= " AND  {$key} = '{$value}' ";
             }
+        } else {
+            //beshe bez else ama... znae li se, ne se znae
+            $sql .= " WHERE {$column} LIKE '%{$like}%' ";
         }
-
-        $sql .= " WHERE {$column} LIKE '%{$like}%' ";
 
         if (!empty($orderBy)){
             $sql .= " ORDER BY {$orderBy[0]} {$orderBy[1]} ";

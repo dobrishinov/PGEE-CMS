@@ -61,6 +61,7 @@ class Database
     }
     
     public function error() {
-        die(mysqli_error($this->connection));
+        header('Location: index.php?c=error');die;
+        mysqli_error($this->connection); die;
     }
 }

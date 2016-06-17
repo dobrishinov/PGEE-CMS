@@ -17,12 +17,16 @@ abstract class Collection {
         $sql = "SELECT * FROM {$this->table} Where id = '{$id}'";
         $result = $this->db->query($sql);
 
-        if (mysqli_num_rows($result) == 0) {
+        if (is_null(mysqli_num_rows($result))) {
             $this->db->error();
         }
 
         $entity = new $this->entity();
         $entity->init($this->db->translate($result));
+
+        if (is_null($entity)) {
+            return null;
+        }
 
         return $entity;
     }
