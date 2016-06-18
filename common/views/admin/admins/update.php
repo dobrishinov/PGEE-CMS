@@ -66,6 +66,16 @@
                             </div>
                         </div>
 
+                        <div class="form-group <?php echo (array_key_exists('avatar', $errors))? 'has-error' : ''; ?>">
+                            <label class="col-sm-4 control-label">Profile pictures</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="avatar" value="<?php echo $data['avatar']; ?>" placeholder="Link to profile pictures">
+                                <span class="help-block m-b-none">
+                                    <?php echo (array_key_exists('avatar', $errors))? $errors['avatar'] : ''; ?>
+                                </span>
+                            </div>
+                        </div>
+
                         <div class="form-group <?php echo (array_key_exists('phone', $errors))? 'has-error' : ''; ?>"><label class="col-sm-4 control-label">Phone</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" name="phone" value="<?php echo $data['phone']; ?>" placeholder="Phone number">

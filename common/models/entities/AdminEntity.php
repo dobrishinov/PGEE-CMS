@@ -7,6 +7,7 @@ class AdminEntity extends Entity
     private $password;
     private $fullName;
     private $information;
+    private $avatar;
     private $phone;
     private $email;
 
@@ -90,6 +91,23 @@ class AdminEntity extends Entity
         $this->information = $information;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    
     /**
      * @return mixed
      */

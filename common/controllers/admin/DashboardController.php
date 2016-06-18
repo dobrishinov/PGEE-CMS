@@ -4,7 +4,9 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
+        if (!$this->loggedIn()) {
+            header('Location: index.php?c=login');
+        }
     }
 
     /*

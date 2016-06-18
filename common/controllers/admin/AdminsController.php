@@ -4,7 +4,9 @@ class AdminsController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
+        if (!$this->loggedIn()) {
+            header('Location: index.php?c=login');
+        }
     }
 
     /*
@@ -95,6 +97,7 @@ class AdminsController extends Controller
             'password'    => '',
             'fullName'    => '',
             'information' => '',
+            'avatar'      => '',
             'phone'       => '',
             'email'       => ''
         );
@@ -106,6 +109,7 @@ class AdminsController extends Controller
                 'password'      => htmlspecialchars(sha1(trim($_POST['password']))),
                 'fullName'      => htmlspecialchars(trim($_POST['fullName'])),
                 'information'   => htmlspecialchars(trim($_POST['information'])),
+                'avatar'        => htmlspecialchars(trim($_POST['avatar'])),
                 'phone'         => htmlspecialchars(trim($_POST['phone'])),
                 'email'         => htmlspecialchars(trim($_POST['email'])),
             );
@@ -158,6 +162,7 @@ class AdminsController extends Controller
             //'password'  => $admin->getPassword(),
             'fullName'    => $admin->getFullName(),
             'information' => $admin->getInformation(),
+            'avatar'      => $admin->getAvatar(),
             'phone'       => $admin->getPhone(),
             'email'       => $admin->getEmail(),
         );
@@ -172,6 +177,7 @@ class AdminsController extends Controller
                 //'password'  => htmlspecialchars(sha1(trim($_POST['password']))),
                 'fullName'    => htmlspecialchars(trim($_POST['fullName'])),
                 'information' => htmlspecialchars(trim($_POST['information'])),
+                'avatar'      => htmlspecialchars(trim($_POST['avatar'])),
                 'phone'       => htmlspecialchars(trim($_POST['phone'])),
                 'email'       => htmlspecialchars(trim($_POST['email'])),
             );
@@ -246,6 +252,9 @@ class AdminsController extends Controller
         if(strlen(trim($data['information'])) < 3 || strlen(trim($data['information'])) > 255) {
             $errors['information'] = 'Invalid information length';
         }
+        if(strlen(trim($data['avatar'])) < 3 || strlen(trim($data['avatar'])) > 255) {
+            $errors['avatar'] = 'Invalid avatar length';
+        }
         if(strlen(trim($data['phone'])) < 3 || strlen(trim($data['phone'])) > 255) {
             $errors['phone'] = 'Invalid phone length';
         }
@@ -276,6 +285,9 @@ class AdminsController extends Controller
         }
         if(strlen(trim($_POST['information'])) < 3 || strlen(trim($_POST['information'])) > 255) {
             $errors['information'] = 'Invalid information length';
+        }
+        if(strlen(trim($_POST['avatar'])) < 3 || strlen(trim($_POST['avatar'])) > 255) {
+            $errors['avatar'] = 'Invalid avatar length';
         }
         if(strlen(trim($_POST['phone'])) < 3 || strlen(trim($_POST['phone'])) > 255) {
             $errors['phone'] = 'Invalid phone length';

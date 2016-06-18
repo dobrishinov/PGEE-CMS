@@ -8,7 +8,7 @@ class PostImagesCollection extends Collection
     public function save(Entity $entity)
     {
         $data = array(
-            'posts_id' => $entity->getPostsId(),
+            'posts_id'   => $entity->getPostsId(),
             'image'      => $entity->getImage(),
         );
 

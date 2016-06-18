@@ -4,7 +4,9 @@ class CategoriesController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
+        if (!$this->loggedIn()) {
+            header('Location: index.php?c=login');
+        }
     }
 
     /*
@@ -152,7 +154,7 @@ class CategoriesController extends Controller
 
         if (isset($_POST['submit'])) {
             $data = array(
-                'id'            =>  htmlspecialchars(trim($_GET['id'])),
+                'id'            => htmlspecialchars(trim($_GET['id'])),
                 'name'          => htmlspecialchars(trim($_POST['name'])),
                 'description'   => htmlspecialchars(trim($_POST['description'])),
             );

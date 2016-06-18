@@ -36,6 +36,7 @@ function __autoload($className)
         $controller != 'posts' &&
         $controller != 'users' &&
         $controller != 'admins' &&
+        $controller != 'login' &&
         $controller != 'error') {
 
         header('Location: index.php?c=error');
@@ -52,7 +53,8 @@ function __autoload($className)
             $method != 'insert' &&
             $method != 'update' &&
             $method != 'delete' &&
-            $method != 'preview') {
+            $method != 'preview' &&
+            $method != 'logout') {
 
             header('Location: index.php?c=error');
             echo 'Method with this name not exist!'; die;

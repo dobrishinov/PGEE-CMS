@@ -1,6 +1,6 @@
 <div class="footer">
     <div class="pull-right">
-       Logged as: <strong>Admin</strong>
+       Logged as: <strong> <?php echo $_SESSION['user']->getUsername();?></strong>
     </div>
     <div>
         <strong>Copyright</strong> Do.IT &copy; 2016

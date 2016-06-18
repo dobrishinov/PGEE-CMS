@@ -4,14 +4,24 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                             <span>
-                                <img style="width: 50px; height: 50px" alt="image" class="img-circle" src="https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-1/p160x160/13179103_1303381229675272_6215573153915636480_n.jpg?oh=83ef3487fbae0b5d5732c41d16f8d853&oe=57CCE71A" />
+                                <img style="width: 50px; height: 50px" alt="image" class="img-circle" src="<?php echo $_SESSION['user']->getAvatar(); ?>" />
                             </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Georgi Dobrishinov</strong>
-                             </span> <span class="text-muted text-xs block">Master Admin Root <b class="caret"></b></span> </span> </a>
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">
+                                        <?php echo $_SESSION['user']->getFullName(); ?>
+                                    </strong>
+                                </span>
+                                <span class="text-muted text-xs block">
+                                    <?php echo $_SESSION['user']->getInformation(); ?>
+                                    <b class="caret"></b>
+                                </span>
+                            </span>
+                        </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="#">View website</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="index.php?c=login&m=logout">Logout</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
