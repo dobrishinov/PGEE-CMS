@@ -1,10 +1,10 @@
 <?php
 
-class BlogImageEntity extends Entity
+class PostImageEntity extends Entity
 {
     private $id;
     private $image;
-    private $blogPostId;
+    private $postsId;
 
     /**
      * @return mixed
@@ -41,18 +41,20 @@ class BlogImageEntity extends Entity
     /**
      * @return mixed
      */
-    public function getBlogPostId()
+    public function getPostsId()
     {
-        return $this->blogPostId;
+        return $this->postsId;
     }
 
     /**
-     * @param mixed $blogPostId
+     * @param mixed $postsId
      */
-    public function setBlogPostId($blogPostId)
+    public function setPostsId($postsId)
     {
-        $this->blogPostId = $blogPostId;
+        $this->postsId = $postsId;
     }
+
+    
     
     
 }

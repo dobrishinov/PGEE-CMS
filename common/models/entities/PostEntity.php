@@ -6,6 +6,7 @@ class PostEntity extends Entity
     private $title;
     private $description;
     private $content;
+    private $image;
     private $date;
     private $authorId;
     private $authorName;
@@ -76,6 +77,22 @@ class PostEntity extends Entity
         $this->content = $content;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+    
     /**
      * @return mixed
      */

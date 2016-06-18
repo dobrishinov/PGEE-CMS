@@ -100,8 +100,11 @@
                                     <br>
                                     <small>by <?php echo $post->getAuthorName();?></small>
                                 </td>
-                                <td colspan="2" class="col-md-5">
+                                <td colspan="2" class="col-md-3">
                                     <?php echo $post->getDescription();?>
+                                </td>
+                                <td colspan="2" class="col-md-2">
+                                    <img src="uploads/postsImages/thumbnails/<?php echo $post->getImage(); ?>" alt="" style="width:80px; height:80px;">
                                 </td>
                                 <td class="project-actions">
                                     <a href="index.php?c=posts&m=preview&id=<?php echo $post->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View </a>

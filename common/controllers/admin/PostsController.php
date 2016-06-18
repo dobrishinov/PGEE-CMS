@@ -105,6 +105,7 @@ class PostsController extends Controller
             'authorName'     => '',
             'date'           => '',
             'content'        => '',
+            'image'          => '',
         );
 
         if (isset($_POST['submit'])) {
@@ -120,11 +121,38 @@ class PostsController extends Controller
 
             $errors = $this->validate($data);
 
-            if (empty($errors)) {
+            $imageErrors = array();
+            if (isset($_FILES['image'])) {
+                $imageName = $_FILES['image']['name'];
+
+                $imageType = $_FILES['image']['type'];
+                $imageSize = $_FILES['image']['size'];
+                $imagePath = $_FILES['image']['tmp_name'];
+                $extension = strtolower(end(explode('/', $imageType)));
+                $imageName = sha1(sha1(time())+sha1($imageName)).'.'.$extension;
+                $allow = array('gif', 'jpg', 'jpeg', 'png');
+
+                if (!in_array($extension, $allow)) {
+                    $imageErrors['extension'] = 'Wrong extension';
+                }
+                if ($imageSize > 1000000) {
+                    $imageErrors['size'] = 'Image is too big!';
+                }
+            }
+
+            if (empty($errors) && empty($imageErrors)) {
+                if (isset($_FILES['image'])) {
+                    $data['image'] = $imageName;
+                }
                 $entity = new PostEntity();
                 $entity->init($data);
                 $postsCollection = new PostsCollection();
                 $postsCollection->save($entity);
+
+                if (isset($_FILES['image'])) {
+                    move_uploaded_file($imagePath, __DIR__.'/../../../admin/uploads/postsImages/thumbnails/' . $imageName);
+                }
+
                 $_SESSION['message']['success'] = ' 1 post CREATED';
                 header('Location: index.php?c=posts');
                 die;
@@ -176,6 +204,7 @@ class PostsController extends Controller
             'authorName'     => $post->getAuthorName(),
             'date'           => $post->getDate(),
             'content'        => htmlspecialchars_decode($post->getContent()),
+            'image'          => $post->getImage(),
         );
 
         $errors = array();
@@ -189,6 +218,7 @@ class PostsController extends Controller
                 'authorName'    => htmlspecialchars(trim($_POST['authorName'])),
                 'date'          => htmlspecialchars(trim($_POST['date'])),
                 'content'       => htmlspecialchars(trim($_POST['content'])),
+                'image'         => $post->getImage(),
             );
 
             $errors = $this->validateUpdate($data);
@@ -235,6 +265,10 @@ class PostsController extends Controller
         }
 
         $postsCollection->delete($post->getId());
+
+        //delete image for tours
+        unlink(__DIR__.'/../../../admin/uploads/postsImages/thumbnails/'.$post->getImage());
+
         $_SESSION['message']['success'] = ' 1 post DELETED';
         header('Location: index.php?c=posts');
         die;
@@ -266,6 +300,9 @@ class PostsController extends Controller
         }
         if(strlen(trim($data['content'])) < 15) {
             $errors['content'] = '<h1 style="text-align: center;"><b style="font-size: larger; color: red;">Invalid content length</b></h1>';
+        }
+        if($_FILES['image']['name'] < 1) {
+            $errors['image'] = 'Invalid thumbnail';
         }
 
         return $errors;
@@ -302,6 +339,11 @@ class PostsController extends Controller
         return $errors;
     }
 
+    /*
+     *
+     * PREVIEW FUNCTION
+     *
+     */
     public function preview()
     {
         $viewData = array();
@@ -324,5 +366,93 @@ class PostsController extends Controller
         $this->loadView('posts/preview.php', $viewData);
     }
 
-}
+    /*
+     *
+     * POSTS IMAGE UPLOADER
+     *
+     */
+    public function postImages()
+    {
+        $viewData = array();
 
+        if (!isset($_GET['id'])) {
+            header('Location: index.php?c=posts');
+        }
+
+        $postsCollection = new PostsCollection();
+        $where = array('t.id' => (int)$_GET['id']);
+        $post = $postsCollection->getImages3($where);
+
+        if (empty($post)) {
+            header('Location: index.php?c=posts');
+            die;
+        }
+
+
+        $where = array('posts_id' => $_GET['id']);
+        $postsImageCollection = new PostImagesCollection();
+        $images = $postsImageCollection->getImages($where);
+
+
+        $imageErrors = array();
+
+        if (isset($_FILES['image'])) {
+            $imageName = $_FILES['image']['name'];
+
+            $imageType = $_FILES['image']['type'];
+            $imageSize = $_FILES['image']['size'];
+            $imagePath = $_FILES['image']['tmp_name'];
+            $extension = strtolower(end(explode('/', $imageType)));
+            $imageName = sha1(sha1(time())+sha1($imageName)).'.'.$extension;
+            $allow = array('gif', 'jpg', 'jpeg', 'png');
+
+            if (!in_array($extension, $allow)) {
+                $imageErrors['extension'] = 'Wrong extension';
+            }
+            if ($imageSize > 1000000) {
+                $imageErrors['size'] = 'Image is too big!';
+            }
+
+            if (empty($imageErrors)) {
+                $data = array(
+                    'posts_id' => $_GET['id'],
+                    'image'    => $imageName
+                );
+
+
+                $entity = new PostImageEntity();
+                $entity->init($data);
+                $postsImageCollection->save($entity);
+                move_uploaded_file($imagePath, __DIR__.'/../../../admin/uploads/postsImages/' . $imageName);
+                header("Location: index.php?c=posts&id={$_GET['id']}");
+            }
+
+        }
+        $viewData['images'] = $images;
+
+        $this->loadView('posts/insert.php', $viewData);
+    }
+
+    public function postImageDelete()
+    {
+        //proverka dali ima podadeno ID
+        if (!isset($_GET['id'])) {
+            header('Location: index.php?c=tours');
+        }
+
+        //Proverka dali ima Image s takova id
+        $toursImagesCollection = new TourImagesCollection();
+        $image = $toursImagesCollection->getOne($_GET['id']);
+        if(empty($image)) {
+            header('Location: index.php?c=tours');
+        }
+
+        //Iztriwane na Image ot bazata kato zapis
+        $toursImagesCollection->delete((int)$_GET['id']);
+
+        //Iztrivane na Image Fizicheski
+        unlink('uploads/'.$image->getImage());
+        header("Location: index.php?c=tours&m=tourImages&id={$image->getToursId()}");
+    }
+
+}

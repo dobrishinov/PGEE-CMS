@@ -23,7 +23,7 @@
             <div class="panel-body">
 
                 <fieldset class="form-horizontal">
-                    <form action="" method="post">
+                    <form id="postForm" action="" method="post" enctype="multipart/form-data">
 
                         <div class="form-group <?php echo (array_key_exists('title', $errors))? 'has-error' : ''; ?>">
                             <label class="col-sm-2 control-label">Post Title:</label>
@@ -88,6 +88,19 @@
                                 </span>
                             </div>
                         </div>
+
+                        <div class="form-group <?php echo (array_key_exists('image', $errors))? 'has-error' : ''; ?>">
+                            <label class="col-sm-2 control-label">Post Thumbnail:</label>
+                            <div class="col-sm-10">
+                                <label class="btn btn-default btn-file">
+                                    Browse <input type="file" id="image" name="image" style="display: none;">
+                                </label>
+                                <span class="help-block m-b-none">
+                                    <?php echo (array_key_exists('image', $errors))? $errors['image'] : ''; ?>
+                                </span>
+                            </div>
+                        </div>
+
 
                         <hr class="hr-line-dashed">
 
