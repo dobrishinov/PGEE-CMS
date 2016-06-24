@@ -38,18 +38,18 @@ class ProjectsCollection extends Collection
         if (!empty($where)) {
             $sql.= " WHERE 1 ";
             foreach ($where as $key => $value) {
-                $sql.= " AND  {$key} = '{$value}' ";
+                $sql.= " AND  {$this->db->escape($key)} = '{$this->db->escape($value)}' ";
             }
         }
 
-        $sql .= " WHERE {$column} LIKE '%{$like}%' ";
+        $sql .= " WHERE {$this->db->escape($column)} LIKE '%{$this->db->escape($like)}%' ";
 
         if (!empty($orderBy)){
-            $sql .= " ORDER BY {$orderBy[0]} {$orderBy[1]} ";
+            $sql .= " ORDER BY {$this->db->escape($orderBy[0])} {$this->db->escape($orderBy[1])} ";
         }
 
         if($limit > -1 && $offset > 0) {
-            $sql .= " LIMIT {$limit} , {$offset} ";
+            $sql .= " LIMIT {$this->db->escape($limit)} , {$this->db->escape($offset)} ";
         }
 
 
@@ -80,7 +80,7 @@ class ProjectsCollection extends Collection
 
         $sql .= " JOIN categories as c ON c.id = t.category_id ";
         $sql .= " JOIN admins as a ON a.id = t.author_id ";
-        $sql .= " WHERE t.id={$id} ";
+        $sql .= " WHERE t.id={$this->db->escape($id)} ";
 
         $result = $this->db->query($sql);
 

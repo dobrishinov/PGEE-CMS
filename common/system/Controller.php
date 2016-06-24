@@ -17,6 +17,12 @@ abstract class Controller {
         extract($data);
         require_once __DIR__.'/../views/admin/'.$viewName;
     }
+
+    public function loadFrontView($viewName, $data= array())
+    {
+        extract($data);
+        require_once __DIR__.'/../views/frontend/'.$viewName;
+    }
     
     public function loggedIn(){
         if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != 1 || !isset($_SESSION['user'])) {
@@ -24,7 +30,6 @@ abstract class Controller {
         }
         return true;
     }
-    
     
     
 }

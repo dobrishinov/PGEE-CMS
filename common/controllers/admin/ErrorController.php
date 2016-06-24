@@ -13,7 +13,7 @@ class ErrorController extends Controller
      */
     public function index()
     {
-        $this->loadView('error.php');
+        $this->loadView('errors/error.php');
     }
 
     /*

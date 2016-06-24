@@ -14,7 +14,7 @@ abstract class Collection {
 
     public function getOne($id)
     {
-        $sql = "SELECT * FROM {$this->table} Where id = '{$id}'";
+        $sql = "SELECT * FROM {$this->table} Where id = '{$this->db->escape($id)}'";
         $result = $this->db->query($sql);
 
         if (is_null(mysqli_num_rows($result))) {
@@ -43,15 +43,15 @@ abstract class Collection {
 
         } else {
             
-            $sql .= " WHERE {$column} LIKE '%{$like}%' ";
+            $sql .= " WHERE {$this->db->escape($column)} LIKE '%{$this->db->escape($like)}%' ";
         }
 
         if (!empty($orderBy)){
-            $sql .= " ORDER BY {$orderBy[0]} {$orderBy[1]} ";
+            $sql .= " ORDER BY {$this->db->escape($orderBy[0])} {$this->db->escape($orderBy[1])} ";
         }
 
         if($limit > -1 && $offset > 0) {
-            $sql .= " LIMIT {$limit} , {$offset} ";
+            $sql .= " LIMIT {$this->db->escape($limit)} , {$this->db->escape($offset)} ";
         }
 
 
@@ -82,9 +82,9 @@ abstract class Collection {
         foreach ($data as $key => $value) {
             ++$i;
             if ($i == $count) {
-                $sql.= " {$key} = '{$value}'";
+                $sql.= " {$this->db->escape($key)} = '{$this->db->escape($value)}'";
             } else {
-                $sql.= " {$key} = '{$value}',";
+                $sql.= " {$this->db->escape($key)} = '{$this->db->escape($value)}',";
             }
         }
 
@@ -100,13 +100,13 @@ abstract class Collection {
         foreach ($data as $key => $value) {
             ++$i;
             if ($i == $count) {
-                $sql.= " {$key} = '{$value}'";
+                $sql.= " {$this->db->escape($key)} = '{$this->db->escape($value)}'";
             } else {
-                $sql.= " {$key} = '{$value}',";
+                $sql.= " {$this->db->escape($key)} = '{$this->db->escape($value)}',";
             }
         }
 
-        $sql.= " WHERE id = '{$id}' ";
+        $sql.= " WHERE id = '{$this->db->escape($id)}' ";
 
         $this->db->query($sql);
 
@@ -115,7 +115,7 @@ abstract class Collection {
 
     public  function delete($id)
     {
-        $sql = "DELETE FROM {$this->table} WHERE id = '{$id}'";
+        $sql = "DELETE FROM {$this->table} WHERE id = '{$this->db->escape($id)}'";
 
         $this->db->query($sql);
     }
