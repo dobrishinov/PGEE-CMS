@@ -13,7 +13,7 @@
                         In a hot and boring day, I decided to create this project with the idea that more people will touch what I do.
                         <br>This project aims to show my interesting DIY projects, articles with problems that I have encountered, interesting news, hacked and leaked databases and many other interesting things associated with opensource software, Linux, embedded systems, photography, mountaineering and lifestyles little goofier than the rest.
                     </p>
-                    <p><a role="button" class="btn btn-primary btn-lg">About me</a>
+                    <p><a href="index.php?c=about" role="button" class="btn btn-primary btn-lg">About me</a>
                     </p>
                 </div>
                 <!--JUMBOTRON-END-->

@@ -4,9 +4,6 @@ class MembersController extends Controller
 {
     public function __construct()
     {
-        if (!$this->loggedIn()) {
-            header('Location: index.php?c=login');
-        }
     }
 
     /*
