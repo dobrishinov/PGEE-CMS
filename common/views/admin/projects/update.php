@@ -3,16 +3,16 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Create Post</h2>
+            <h2>Edit Project</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="index.php">Admin</a>
                 </li>
                 <li>
-                    <a href="index.php?c=blog">Blogs</a>
+                    <a href="index.php?c=projects">Projects</a>
                 </li>
                 <li class="active">
-                    <strong>Create Post</strong>
+                    <strong>Edit Project</strong>
                 </li>
             </ol>
         </div>
@@ -23,10 +23,10 @@
             <div class="panel-body">
 
                 <fieldset class="form-horizontal">
-                    <form id="postForm" action="" method="post" enctype="multipart/form-data">
+                    <form action="" method="post">
 
                         <div class="form-group <?php echo (array_key_exists('title', $errors))? 'has-error' : ''; ?>">
-                            <label class="col-sm-2 control-label">Post Title:</label>
+                            <label class="col-sm-2 control-label">Project Title:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="title" value="<?php echo $data['title']; ?>" placeholder="My Title">
                                 <span class="help-block m-b-none">
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group <?php echo (array_key_exists('description', $errors))? 'has-error' : ''; ?>">
-                            <label class="col-sm-2 control-label">Post Description:</label>
+                            <label class="col-sm-2 control-label">Project Description:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="description" value="<?php echo $data['description']; ?>" placeholder="Some text for description">
                                 <span class="help-block m-b-none">
@@ -44,6 +44,16 @@
                                 </span>
                             </div>
                         </div>
+
+                        <hr class="hr-line-dashed">
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="summernote" name="content" id="summernote" rows="10" cols="30"><?php echo $data['content']; ?><?php echo (array_key_exists('content', $errors))? $errors['content'] : ''; ?></textarea>
+                            </div>
+                        </div>
+
+                        <hr class="hr-line-dashed">
 
                         <div class="form-group <?php echo (array_key_exists('categoryName', $errors))? 'has-error' : ''; ?>">
                             <label class="col-sm-2 control-label">Category:</label>
@@ -89,33 +99,54 @@
                             </div>
                         </div>
 
-                        <div class="form-group <?php echo (array_key_exists('image', $errors))? 'has-error' : ''; ?>">
-                            <label class="col-sm-2 control-label">Post Thumbnail:</label>
-                            <div class="col-sm-10">
-                                <label class="btn btn-default btn-file">
-                                    Browse <input type="file" id="image" name="image" style="display: none;">
-                                </label>
-                                <span class="help-block m-b-none">
-                                    <?php echo (array_key_exists('image', $errors))? $errors['image'] : ''; ?>
-                                </span>
-                            </div>
-                        </div>
-
-
                         <hr class="hr-line-dashed">
 
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <textarea class="summernote" name="content" id="summernote" rows="10" cols="30"><?php echo $data['content']; ?><?php echo (array_key_exists('content', $errors))? $errors['content'] : ''; ?></textarea>
-                            </div>
-                        </div>
-
-                        <hr class="hr-line-dashed">
-
-                        <input class="btn btn-primary pull-right" type="submit" name="submit" value="Save Post">
+                        <input class="btn btn-primary pull-right" type="submit" name="submit" value="Save Project">
 
                     </form>
                 </fieldset>
+
+                <hr class="hr-line-dashed">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Saved Images
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"> Delete</i></a>
+                                </div>
+                                <div class="panel-body">
+                                    <img style="width:250px; height:220px; margin-left: auto; margin-right: auto;" class="img-responsive" src="https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-1/p160x160/13179103_1303381229675272_6215573153915636480_n.jpg?oh=83ef3487fbae0b5d5732c41d16f8d853&oe=57CCE71A" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"> Delete</i></a>
+                                </div>
+                                <div class="panel-body">
+                                    <img style="width:250px; height:220px; margin-left: auto; margin-right: auto" class="img-responsive" src="https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-1/p160x160/13179103_1303381229675272_6215573153915636480_n.jpg?oh=83ef3487fbae0b5d5732c41d16f8d853&oe=57CCE71A" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"> Delete</i></a>
+                                </div>
+                                <div class="panel-body">
+                                    <img style="width:250px; height:220px; margin-left: auto; margin-right: auto" class="img-responsive" src="https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-1/p160x160/13179103_1303381229675272_6215573153915636480_n.jpg?oh=83ef3487fbae0b5d5732c41d16f8d853&oe=57CCE71A" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
 
             </div>
         </div>

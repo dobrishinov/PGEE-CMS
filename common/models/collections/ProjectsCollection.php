@@ -12,6 +12,7 @@ class ProjectsCollection extends Collection
             'title'         => $this->db->escape($entity->getTitle()),
             'description'   => $this->db->escape($entity->getDescription()),
             'content'       => $this->db->escape($entity->getContent()),
+            'image'         => $this->db->escape($entity->getImage()),
             'date'          => $this->db->escape($entity->getDate()),
             'author_id'     => $this->db->escape($entity->getAuthorName()),
             'category_id'   => $this->db->escape($entity->getCategoryName()),
@@ -27,7 +28,7 @@ class ProjectsCollection extends Collection
     public function get($where = array(), $limit = -1, $offset = 0, $like, $orderBy = array(), $column = ' ')
     {
         $sql = "SELECT
-                t.id, t.title, t.description, t.date,
+                t.id, t.title, t.description, t.image, t.date,
                 a.username as author_name,
                 c.name as category_name
                 FROM {$this->table} as t";
@@ -40,9 +41,10 @@ class ProjectsCollection extends Collection
             foreach ($where as $key => $value) {
                 $sql.= " AND  {$this->db->escape($key)} = '{$this->db->escape($value)}' ";
             }
+        } else {
+            //beshe bez else ama... znae li se, ne se znae
+            $sql .= " WHERE {$this->db->escape($column)} LIKE '%{$this->db->escape($like)}%' ";
         }
-
-        $sql .= " WHERE {$this->db->escape($column)} LIKE '%{$this->db->escape($like)}%' ";
 
         if (!empty($orderBy)){
             $sql .= " ORDER BY {$this->db->escape($orderBy[0])} {$this->db->escape($orderBy[1])} ";

@@ -6,6 +6,7 @@ class ProjectEntity extends Entity
     private $title;
     private $description;
     private $content;
+    private $image;
     private $date;
     private $authorId;
     private $authorName;
@@ -74,6 +75,22 @@ class ProjectEntity extends Entity
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
     /**

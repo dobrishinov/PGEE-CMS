@@ -303,7 +303,7 @@ class PostsController extends Controller
         if(strlen(trim($data['content'])) < 15) {
             $errors['content'] = '<h1 style="text-align: center;"><b style="font-size: larger; color: red;">Invalid content length</b></h1>';
         }
-        if($_FILES['image']['name'] < 1) {
+        if($_FILES['image']['name'] == null) {
             $errors['image'] = 'Invalid thumbnail';
         }
 

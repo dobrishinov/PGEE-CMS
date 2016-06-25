@@ -24,30 +24,34 @@
                     <h2>Latest Projects</h2>
                     <div class="row">
 
-                        <?php foreach ($posts as $post): ?>
-                            <div class="col-md-3 animated fadeInDown">
-                            <div class="ibox">
-                                <div class="ibox-content product-box">
-                                    <div class="product-imitation">
-                                        <img style="width: 300px; height: 200px;" class="img-responsive" src="admin/uploads/postsImages/thumbnails/<?php echo $post->getImage(); ?>" alt="">
-                                    </div>
-                                    <div class="product-desc">
-                                    <span class="product-price">
-                                        <?php echo $post->getTitle(); ?>
-                                    </span>
-<!--                                        <a href="#" class="product-name"> Product</a>-->
-                                        <small class="text-muted">Category: <?php echo $post->getCategoryName(); ?></small>
-                                        <div class="m-t-xs">
-                                            <?php echo $post->getDescription(); ?>
+                        <?php foreach ($projects as $project): ?>
+                            <div class="col-md-3 animated fadeInRight">
+                                <div class="ibox">
+                                    <div class="ibox-content product-box">
+                                        <div class="product-imitation">
+                                            <img class="img-responsive" style="width: 250px; height: 185px;" src="admin/uploads/projectsImages/thumbnails/<?php echo $project->getImage(); ?>" alt="">
                                         </div>
-                                        <div class="m-t text-righ">
-                                            <a href="index.php?c=blog&m=show&id=<?php echo $post->getId(); ?>" class="btn btn-xs btn-outline btn-primary">Read <i class="fa fa-long-arrow-right"></i>
-                                            </a>
+                                        <div class="product-desc">
+                                        <span class="product-price">
+                                            <?php echo $project->getTitle(); ?>
+                                        </span>
+                                            <a href="index.php?c=projects&m=show&id=<?php echo $project->getId(); ?>" class="product-name"> <?php //echo substr($project->getTitle(), 0, 40); ?></a>
+                                            <small class="text-muted">Category: <?php echo substr($project->getCategoryName(), 0, 30); ?></small>
+                                            <br>
+                                            <small class="text-muted">Date: <?php echo $project->getDate(); ?></small>
+                                            <hr>
+                                            <div class="small m-t-xs">
+                                                <?php echo substr($project->getDescription(), 0, 37)." ..."; ?>
+                                            </div>
+                                            <hr>
+                                            <div class="m-t text-righ">
+                                                <a href="index.php?c=projects&m=show&id=<?php echo $project->getId(); ?>" class="btn btn-xs btn-outline btn-primary">View <i class="fa fa-desktop"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
 
                         <div class="row">

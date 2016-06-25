@@ -20,7 +20,7 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="#">View website</a></li>
+                            <li><a href="../">View website</a></li>
                             <li><a href="index.php?c=login&m=logout">Logout</a></li>
                         </ul>
                     </div>
@@ -44,7 +44,7 @@
                     <a href="index.php?c=posts"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Blog</span> </a>
                 </li>
                 <li class="<?php echo ($activePage == 'index.php?c=users')? 'active' : ''; ?>">
-                    <a href="index.php?c=users"><i class="fa fa-users"></i> <span class="nav-label">Users</span> </a>
+                    <a href="index.php?c=admins"><i class="fa fa-users"></i> <span class="nav-label">Users</span> </a>
                 </li>
                 <li class="<?php echo ($activePage == 'index.php?c=admins')? 'active' : ''; ?>">
                     <a href="index.php?c=admins"><i class="fa fa-beer"></i> <span class="nav-label">Admins</span> </a>

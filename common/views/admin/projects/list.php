@@ -1,88 +1,42 @@
-<?php require_once 'common/header.php' ?>
-
-<?php
-
-$search = (isset($_GET['search'])) ? htmlspecialchars(trim($_GET['search'])) : '';
-
-
-$projectsCollection = new ProjectsCollection();
-
-//В тази променлива пазим броя резултати които искаме да върне заявката
-//$pageResults = (isset($_GET['perPage']))? (int)$_GET['perPage'] : 5;
-
-$pageResults = (isset($_GET['perPage'])) ? (int)$_GET['perPage'] : 0;
-switch ($pageResults) {
-    case 1:
-        $pageResults = 1;
-        break;
-    case 5:
-        $pageResults = 5;
-        break;
-    case 10:
-        $pageResults = 10;
-        break;
-    default:
-        $pageResults = 5;
-}
-
-//Филтър за подреждане по
-
-
-
-$orderBy = (isset($_GET['orderBy'])) ? (int)$_GET['orderBy'] : 0;
-switch ($orderBy) {
-    case 1:
-        $order = array('date', 'DESC');
-        break;
-    case 2:
-        $order = array('date', 'ASC');
-        break;
-    case 3:
-        $order = array('title', 'ASC');
-        break;
-    case 4:
-        $order = array('title', 'DESC');
-        break;
-    default:
-        $order = array('date', 'DESC');
-}
-
-
-//В променливата $page присвояваме гет параметъра, който се придава. Ако няма гет параметър то тогава слагаме 1.
-$page = (isset($_GET['page']) && (int)$_GET['page'] > 0)? (int)$_GET['page'] : 1;
-
-//В тази променлива изчисляваме от кой точно резултат да започне броенето в заявката.
-$offset = ($page-1)*$pageResults;
-
-$projects = $projectsCollection->get(array(), $offset, $pageResults, $search, $order, 'title');
-
-$totalRows = count($projectsCollection->get(array(), -1, 0, $search, $order, 'title'));
-$totalRows = ($totalRows == 0)? 1 : $totalRows;
-
-$paginator = new Pagination();
-$paginator->setPerPage($pageResults);
-$paginator->setTotalRows($totalRows);
-$paginator->setBaseUrl("projectsListing.php?perPage={$pageResults}&orderBy={$orderBy}&search={$search}");
-
-?>
-
-<?php require_once 'common/sidebar.php' ?>
+<?php require_once __DIR__.'/../../../../admin/common/header.php' ?>
+<?php require_once __DIR__.'/../../../../admin/common/sidebar.php' ?>
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Blog</h2>
+            <h2>Projects</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="index.php">Admin</a>
                 </li>
                 <li class="active">
-                    <strong>Blog</strong>
+                    <strong>Projects</strong>
                 </li>
             </ol>
         </div>
     </div>
 
     <div class="wrapper wrapper-content animated fadeInDown">
+
+        <?php if (isset($_SESSION['message'])): ?>
+
+            <?php if (isset($_SESSION['message']['success'])): ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>Success: </strong> <?php echo $_SESSION['message']['success']; ?>
+                </div>
+                <?php unset($_SESSION['message']['success']); ?>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['message']['warning'])): ?>
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>OOPS!</strong> <?php echo $_SESSION['message']['warning'];?>
+                </div>
+                <?php unset($_SESSION['message']['warning']); ?>
+            <?php endif; ?>
+
+        <?php endif; ?>
+
         <div class="ibox">
             <div class="ibox-title">
 
@@ -92,6 +46,7 @@ $paginator->setBaseUrl("projectsListing.php?perPage={$pageResults}&orderBy={$ord
 
                         <div class="col-md-4">
                             <div class="input-group">
+                                <input type="hidden" name="c" value="projects">
                                 <input type="text" class="form-control" name="search" value="<?php echo $search; ?>" placeholder="Search Projects">
                                     <span class="input-group-btn">
                                        <input type="submit" class="btn btn-primary" value="Go">
@@ -117,7 +72,7 @@ $paginator->setBaseUrl("projectsListing.php?perPage={$pageResults}&orderBy={$ord
                         </div>
 
                         <div class="col-md-2 col-md-offset-1">
-                            <a href="projectCreate.php" class="btn btn-primary btn">New Project</a>
+                            <a href="index.php?c=projects&m=insert" class="btn btn-primary btn">New Projects</a>
                         </div>
 
                     </div>
@@ -139,19 +94,22 @@ $paginator->setBaseUrl("projectsListing.php?perPage={$pageResults}&orderBy={$ord
                                     <span class="label label-primary"><?php echo $project->getCategoryName(); ?></span>
                                 </td>
                                 <td class="col-md-3">
-                                    <a href="projectView.php?id=<?php echo $project->getId();?>"><?php echo $project->getTitle(); ?></a>
+                                    <a href="index.php?c=projects&m=preview&id=<?php echo $project->getId(); ?>"><?php echo $project->getTitle(); ?></a>
                                     <br>
                                     <small>Created <?php echo $project->getDate(); ?></small>
                                     <br>
                                     <small>by <?php echo $project->getAuthorName();?></small>
                                 </td>
-                                <td colspan="2" class="col-md-5">
+                                <td colspan="2" class="col-md-3">
                                     <?php echo $project->getDescription();?>
                                 </td>
+                                <td colspan="2" class="col-md-2">
+                                    <img src="uploads/projectsImages/thumbnails/<?php echo $project->getImage(); ?>" alt="" style="width:80px; height:80px;">
+                                </td>
                                 <td class="project-actions">
-                                    <a href="projectView.php?id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View </a>
-                                    <a href="projectEdit.php?id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                    <a href="projectDelete.php?id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> Delete </a>
+                                    <a href="index.php?c=projects&m=preview&id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-eye"></i> View </a>
+                                    <a href="index.php?c=projects&m=update&id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                    <a href="index.php?c=projects&m=delete&id=<?php echo $project->getId();?>" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> Delete </a>
                                 </td>
                             </tr>
                         <?php }  ?>
@@ -167,4 +125,4 @@ $paginator->setBaseUrl("projectsListing.php?perPage={$pageResults}&orderBy={$ord
         </div>
     </div>
 
-<?php require_once 'common/footer.php' ?>
+<?php require_once __DIR__.'/../../../../admin/common/footer.php' ?>

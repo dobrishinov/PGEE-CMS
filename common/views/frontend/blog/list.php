@@ -13,7 +13,7 @@
                             <a href="index.php">Home</a>
                         </li>
                         <li>
-                            <a>Blog</a>
+                            <a href="index.php?c=blog">Blog</a>
                         </li>
                     </ol>
                 </div>
@@ -99,20 +99,22 @@
                         <ul class="list-unstyled file-list">
                             <li>
                                 <a href="index.php?c=blog&m=postsByCategory&categoryId=0">
-                                    <i class="fa fa-file"></i>&nbsp;&nbsp;All Categories
+                                    <i class="fa fa-ellipsis-v"></i>&nbsp;&nbsp;All Categories
                                 </a>
                             </li>
 
                             <?php foreach ($categories as $category): ?>
                                 <li>
                                     <a href="index.php?c=blog&m=postsByCategory&categoryId=<?php echo $category->getId(); ?>">
-                                        <i class="fa fa-file"></i>&nbsp;&nbsp;<?php echo $category->getName();?>
+                                        <i class="fa fa-bookmark-o"></i>&nbsp;&nbsp;<?php echo $category->getName();?>
                                     </a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
+                <br>
+                <br>
 
                 <!--BLOG-CATEGORIES-END-->
             </div>

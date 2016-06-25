@@ -24,7 +24,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                    <a href="index.php?c=contacts">
+                    <a href="index.php?c=members">
                         <i class="fa fa-bolt"></i> Contacts
                     </a>
                 </li>

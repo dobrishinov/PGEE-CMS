@@ -37,7 +37,6 @@ if ($controller != 'home' &&
     $controller != 'members' &&
     $controller != 'contacts' &&
     $controller != 'about' &&
-    $controller != 'login' &&
     $controller != 'error') {
 
     header('Location: index.php?c=error');
@@ -51,7 +50,10 @@ if (class_exists($controllerName)) {
     $controller = new $controllerName();
 
     if ($method != 'index' &&
-        $method != 'show') {
+        $method != 'postsByCategory' &&
+        $method != 'projectsByCategory' &&
+        $method != 'show'
+        ) {
 
         header('Location: index.php?c=error');
         echo 'Method with this name not exist!'; die;
