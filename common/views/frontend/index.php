@@ -57,7 +57,7 @@
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <p>
-                                    <a href="index.php?c=blog" role="button" class="btn btn-primary btn-lg">Browse all projects</a>
+                                    <a href="index.php?c=projects" role="button" class="btn btn-primary btn-lg">Browse all projects</a>
                                 </p>
                             </div>
                         </div>

@@ -36,14 +36,14 @@ class AdminsCollection extends Collection
 
         $result = $this->db->query($sql);
 
-        if (is_null(mysqli_num_rows($result))) {
-            $this->db->error();
+        if (mysqli_num_rows($result) == 0) {
+            return null;
         }
 
         $entity = new $this->entity();
         $entity->init($this->db->translate($result));
 
-        if (is_null($entity)) {
+        if (is_null($entity->getId())) {
             return null;
         }
 

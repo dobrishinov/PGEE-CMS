@@ -56,12 +56,12 @@
             <div class="col-lg-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5><i class="fa fa-users"></i> Users</h5>
+                        <h5><i class="fa fa-users"></i> Admins</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins"><?php echo $users?></h1>
+                        <h1 class="no-margins"><?php echo $admins?></h1>
                         <div class="stat-percent font-bold text-danger"><a class="text-navy" href="index.php?c=users">View all</a></div>
-                        <small>Total Users</small>
+                        <small>Total Admins</small>
                     </div>
                 </div>
             </div>
