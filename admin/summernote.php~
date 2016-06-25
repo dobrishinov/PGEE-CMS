@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Do.IT - Admin panel</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body onload="startTime()">
+
+<div class="summernote container">
+	<div class="row">
+		<div class="span12">
+			<h2>POST DATA</h2>
+			<pre>
+			<?php print_r($_POST); ?>
+			</pre>
+			<pre>
+			<?php echo htmlspecialchars($_POST['content']); ?>
+			</pre>
+		</div>
+	</div>
+	<div class="row">
+		<form class="span12" id="postForm" action="summernote.php" method="POST" enctype="multipart/form-data" onsubmit="return postForm()">
+			<fieldset>
+				<legend>Make Post</legend>
+				<p class="container"><div class="col-sm-12">
+                                <textarea class="input-block-level" name="summernote" id="summernote" rows="10" cols="30"></textarea>
+                            </div>
+				</p>
+			</fieldset>
+			<button type="submit" class="btn btn-primary">Save changes</button>
+			<button type="button" id="cancel" class="btn">Cancel</button>
+		</form>
+	</div>
+</div>
+
+
+</div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/plugins/summernote/summernote.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#summernote').summernote({
+		height: "500px"
+	});
+});
+var postForm = function() {
+	var content = $('textarea[name="content"]').html($('#summernote').code());
+}
+</script>
+<script>
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('clock').innerHTML =
+            h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+</script>
+
+</body>
+</html>
