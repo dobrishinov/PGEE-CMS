@@ -7,7 +7,7 @@
         Slow progress is better than no <strong>progress</strong>.
     </div>
     <div>
-        <strong>Copyright</strong> Dobrishinov - Do.IT &copy; 2016
+        <strong>Dobrishinov-Do.IT &copy; 2016</strong> <small>Site content is copyrighted and may not be distributed , copied or recreate without permission.</small>
     </div>
 </div>
 <!--FOOTER-END-->
