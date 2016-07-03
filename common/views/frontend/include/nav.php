@@ -10,16 +10,16 @@
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a aria-expanded="false" role="button" href="index.php"><i class="fa fa-home">&nbsp; Home</i></a>
+                    <a aria-expanded="false" role="button" href="index.php"><i class="fa fa-home"></i>&nbsp; Home</a>
                 </li>
                 <li class="">
-                    <a aria-expanded="false" role="button" href="index.php?c=projects"><i class="fa fa-terminal">&nbsp; Projects</i></a>
+                    <a aria-expanded="false" role="button" href="index.php?c=projects"><i class="fa fa-terminal"></i>&nbsp; Projects</a>
                 </li>
                 <li class="">
-                    <a aria-expanded="false" role="button" href="index.php?c=blog"><i class="fa fa-newspaper-o">&nbsp; Blog</i></a>
+                    <a aria-expanded="false" role="button" href="index.php?c=blog"><i class="fa fa-newspaper-o"></i>&nbsp; Blog</a>
                 </li>
                 <li class="">
-                    <a aria-expanded="false" role="button" href="index.php?c=members"><i class="fa fa-support">&nbsp; Members</i></a>
+                    <a aria-expanded="false" role="button" href="index.php?c=members"><i class="fa fa-support"></i>&nbsp; Members</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
