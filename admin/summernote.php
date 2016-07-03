@@ -17,7 +17,7 @@
 
 </head>
 
-<body onload="startTime()">
+<body>
 
 <div class="summernote container">
 	<div class="row">
@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<form class="span12" id="postForm" action="summernote.php" method="get" enctype="multipart/form-data" onsubmit="return postForm()">
+		<form class="span12" id="postForm" action="" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Make Post</legend>
 				<p class="container"><textarea class="input-block-level" id="summernote" name="content" rows="18"></textarea>
@@ -59,31 +59,26 @@
 <script src="js/plugins/pace/pace.min.js"></script>
 <script src="js/plugins/summernote/summernote.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-	$('#summernote').summernote({
-		height: "500px"
-	});
-});
-var postForm = function() {
-	var content = $('textarea[name="content"]').html($('#summernote').code());
-}
-</script>
-<script>
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        document.getElementById('clock').innerHTML =
-            h + ":" + m + ":" + s;
-        var t = setTimeout(startTime, 500);
-    }
-    function checkTime(i) {
-        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-        return i;
-    }
+    $('#summernote').summernote({
+        height: '300px',
+        onImageUpload: function(files) {
+            var $editor = $(this);
+            var data = new FormData();
+            data.append('file', files[0]);
+            $.ajax({
+                url: 'saveimage.php',
+                method: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    var imgURL = data.url;
+                    $editor.summernote('insertImage', imgURL);
+                }
+            });
+        }
+    });
+
 </script>
 
 </body>

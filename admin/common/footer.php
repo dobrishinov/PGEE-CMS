@@ -19,7 +19,7 @@
 <!-- Custom and plugin javascript -->
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
-<script src="js/plugins/summernote/summernote.min.js"></script>
+<script src="js/plugins/summernote/summernote.js"></script>
 <script>
     $(document).ready(function() {
         $('.summernote').summernote({
