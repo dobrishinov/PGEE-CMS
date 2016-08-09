@@ -1,40 +1,42 @@
-<!--NAVBAR-START-->
-<div class="row border-bottom white-bg">
-    <nav class="navbar navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                <i class="fa fa-reorder"></i>
-            </button>
-            <a href="index.php" class="navbar-brand">Do.IT</a>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar">
-            <ul class="nav navbar-nav">
-                <li class="">
-                    <a aria-expanded="false" role="button" href="index.php"><i class="fa fa-home"></i>&nbsp; Home</a>
-                </li>
-                <li class="">
-                    <a aria-expanded="false" role="button" href="index.php?c=projects"><i class="fa fa-terminal"></i>&nbsp; Projects</a>
-                </li>
-                <li class="">
-                    <a aria-expanded="false" role="button" href="index.php?c=blog"><i class="fa fa-newspaper-o"></i>&nbsp; Blog</a>
-                </li>
-                <li class="">
-                    <a aria-expanded="false" role="button" href="index.php?c=members"><i class="fa fa-support"></i>&nbsp; Members</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                    <a href="index.php?c=members">
-                        <i class="fa fa-bolt"></i> Contacts
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?c=about">
-                        <i class="fa fa-info-circle"></i> About
-                    </a>
-                </li>
-            </ul>
-        </div>
+<header id="site-head" class="clear">
+    <div class="logo">
+        <img src="images/pgee-logo.svg" alt="PGEE Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.php">Начало</a></li>
+            <li>
+                <a href="#">Училище</a>
+                <ul class="sub-menu">
+                    <?php
+                    $navSchools = $this->getSchoolParams();
+                    ?>
+                    <?php foreach ($navSchools as $navSchool): ?>
+                        <li><a href="index.php?c=school&m=show&id=<?php echo $navSchool->getId(); ?>"><?php echo $navSchool->getTitle(); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Проекти</a>
+                <ul class="sub-menu">
+                    <?php
+                    $navProjects = $this->getProjectsParams();
+                    ?>
+                    <?php foreach ($navProjects as $navProject): ?>
+                        <li><a href="index.php?c=projects&m=show&id=<?php echo $navProject->getId(); ?>"> <?php echo $navProject->getTitle(); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+            <li><a href="index.php?c=blog">Блог</a></li>
+            <li><a href="#">Профил на купувача</a></li>
+            <li><a href="#">Kонтакти</a></li>
+        </ul>
     </nav>
-</div>
-<!--NAVBAR-END-->
+    <div class="hamburger">
+        <ul>
+            <li id="ham-l1"></li>
+            <li id="ham-l2"></li>
+            <li id="ham-l3"></li>
+        </ul>
+    </div>
+</header>

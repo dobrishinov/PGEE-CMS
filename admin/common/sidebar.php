@@ -37,14 +37,14 @@
                 <li class="<?php echo ($activePage == 'index.php?c=categories')? 'active' : ''; ?>">
                     <a href="index.php?c=categories"><i class="fa fa-tags"></i> <span class="nav-label">Categories</span> </a>
                 </li>
+                <li class="<?php echo ($activePage == 'index.php?c=school')? 'active' : ''; ?>">
+                    <a href="index.php?c=school"><i class="fa fa-graduation-cap"></i> <span class="nav-label">School</span> </a>
+                </li>
                 <li class="<?php echo ($activePage == 'index.php?c=projects')? 'active' : ''; ?>">
                     <a href="index.php?c=projects"><i class="fa fa-flask"></i> <span class="nav-label">Projects</span> </a>
                 </li>
                 <li class="<?php echo ($activePage == 'index.php?c=posts')? 'active' : ''; ?>">
                     <a href="index.php?c=posts"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Blog</span> </a>
-                </li>
-                <li class="<?php echo ($activePage == 'index.php?c=users')? 'active' : ''; ?>">
-                    <a href="index.php?c=admins"><i class="fa fa-users"></i> <span class="nav-label">Users</span> </a>
                 </li>
                 <li class="<?php echo ($activePage == 'index.php?c=admins')? 'active' : ''; ?>">
                     <a href="index.php?c=admins"><i class="fa fa-beer"></i> <span class="nav-label">Admins</span> </a>

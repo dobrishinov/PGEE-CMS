@@ -4,33 +4,7 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        $viewData = array();
-
-        $search = (isset($_GET['search'])) ? htmlspecialchars(trim($_GET['search'])) : '';
-        $page = (isset($_GET['page']) && (int)$_GET['page'] > 0)? (int)$_GET['page'] : 1;
-
-        $projectsNumberPerPage = 8;
-        $offset = ($page-1)*8;
-
-        $projectsCollection = new ProjectsCollection();
-        $projects = $projectsCollection->get(array(), $offset, $projectsNumberPerPage, $search, array('date', 'DESC'), 'title');
-
-        $categoriesCollection = new CategoriesCollection();
-        $categories = $categoriesCollection->get(1, null, null, null, null, null);
-
-        $totalRows = count($projectsCollection->get(array(), null, null, $search, null, 'title'));
-        $totalRows = ($totalRows == 0)? 1 : $totalRows;
-        
-        $paginator = new Pagination();
-        $paginator->setPerPage($projectsNumberPerPage);
-        $paginator->setTotalRows($totalRows);
-        $paginator->setBaseUrl("index.php?c=projects&search={$search}");
-
-        $viewData['projects'] = $projects;
-        $viewData['categories'] = $categories;
-        $viewData['paginator'] = $paginator;
-
-        $this->loadFrontView('projects/list.php', $viewData);
+        header('Location: index.php');
     }
 
     public function show()

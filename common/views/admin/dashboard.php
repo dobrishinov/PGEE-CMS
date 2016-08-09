@@ -20,6 +20,18 @@
             <div class="col-lg-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
+                        <h5><i class="fa fa-graduation-cap"></i> School</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><?php echo $school ?></h1>
+                        <div class="stat-percent font-bold"><a class="text-navy" href="index.php?c=projects">View all</a></div>
+                        <small>Total School posts</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
                         <h5><i class="fa fa-flask"></i> Projects</h5>
                     </div>
                     <div class="ibox-content">

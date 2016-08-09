@@ -36,6 +36,7 @@ function __autoload($className)
         $controller != 'posts' &&
         $controller != 'users' &&
         $controller != 'admins' &&
+        $controller != 'school' &&
         $controller != 'login' &&
         $controller != 'error') {
 

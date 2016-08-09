@@ -3,7 +3,7 @@
        Logged as: <strong> <?php echo $_SESSION['user']->getUsername();?></strong>
     </div>
     <div>
-        <strong>Copyright</strong> Do.IT &copy; 2016
+        <strong>Copyright</strong> PGEE Plovdiv - <a href="http://dobrishinov.6tai.ga">Do.IT CMS</a> &copy; 2016
     </div>
 </div>
 

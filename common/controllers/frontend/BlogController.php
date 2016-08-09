@@ -6,29 +6,10 @@ class BlogController extends Controller
     {
         $viewData = array();
 
-        $search = (isset($_GET['search'])) ? htmlspecialchars(trim($_GET['search'])) : '';
-        $page = (isset($_GET['page']) && (int)$_GET['page'] > 0)? (int)$_GET['page'] : 1;
-
-        $postsNumberPerPage = 3;
-        $offset = ($page-1)*3;
-
         $postsCollection = new PostsCollection();
-        $posts = $postsCollection->get(array(), $offset, $postsNumberPerPage, $search, array('date', 'DESC'), 'title');
-
-        $categoriesCollection = new CategoriesCollection();
-        $categories = $categoriesCollection->get(1, null, null, null, null, null);
-
-        $totalRows = count($postsCollection->get(array(), null, null, $search, null, 'title'));
-        $totalRows = ($totalRows == 0)? 1 : $totalRows;
-
-        $paginator = new Pagination();
-        $paginator->setPerPage($postsNumberPerPage);
-        $paginator->setTotalRows($totalRows);
-        $paginator->setBaseUrl("index.php?c=blog&search={$search}");
+        $posts = $postsCollection->get(array(), null, null, null, array('date', 'DESC'), 'title');
 
         $viewData['posts'] = $posts;
-        $viewData['categories'] = $categories;
-        $viewData['paginator'] = $paginator;
 
         $this->loadFrontView('blog/list.php', $viewData);
     }

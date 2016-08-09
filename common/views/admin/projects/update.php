@@ -107,47 +107,7 @@
                 </fieldset>
 
                 <hr class="hr-line-dashed">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Saved Images
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"> Delete</i></a>
-                                </div>
-                                <div class="panel-body">
-                                    <img style="width:250px; height:220px; margin-left: auto; margin-right: auto;" class="img-responsive" src="https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-1/p160x160/13179103_1303381229675272_6215573153915636480_n.jpg?oh=83ef3487fbae0b5d5732c41d16f8d853&oe=57CCE71A" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"> Delete</i></a>
-                                </div>
-                                <div class="panel-body">
-                                    <img style="width:250px; height:220px; margin-left: auto; margin-right: auto" class="img-responsive" src="https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-1/p160x160/13179103_1303381229675272_6215573153915636480_n.jpg?oh=83ef3487fbae0b5d5732c41d16f8d853&oe=57CCE71A" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"> Delete</i></a>
-                                </div>
-                                <div class="panel-body">
-                                    <img style="width:250px; height:220px; margin-left: auto; margin-right: auto" class="img-responsive" src="https://scontent.fsof2-1.fna.fbcdn.net/v/t1.0-1/p160x160/13179103_1303381229675272_6215573153915636480_n.jpg?oh=83ef3487fbae0b5d5732c41d16f8d853&oe=57CCE71A" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
+                
             </div>
         </div>
         <br><br>

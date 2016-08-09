@@ -35,6 +35,7 @@ if ($controller != 'home' &&
     $controller != 'projects' &&
     $controller != 'blog' &&
     $controller != 'members' &&
+    $controller != 'school' &&
     $controller != 'contacts' &&
     $controller != 'about' &&
     $controller != 'error') {

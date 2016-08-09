@@ -27,13 +27,17 @@ class DashboardController extends Controller
         $categoriesCollection = new CategoriesCollection();
         $categories = count($categoriesCollection->get(array(), 0, -1, null, null, $column='name'));
 
+        $schoolCollection = new SchoolCollection();
+        $school = count($schoolCollection->get(array(), 0, -1, null, null, $column='name'));
+
         $adminsCollection = new AdminsCollection();
         $admins = count($adminsCollection->get(array(), 0, -1, null, null, $column='username'));
 
         $viewData['projects']   = $projects;
         $viewData['posts']      = $posts;
         $viewData['categories'] = $categories;
-        $viewData['admins']      = $admins;
+        $viewData['school']     = $school;
+        $viewData['admins']     = $admins;
 
         $this->loadView('dashboard.php', $viewData);
     }

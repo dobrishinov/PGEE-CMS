@@ -6,7 +6,7 @@
     <div>
         <div>
 
-            <h1 class="logo-name">Do.IT</h1>
+            <h1 class="logo-name">PGEE</h1>
 
         </div>
         <h3>Admin Panel Login</h3>
@@ -32,7 +32,7 @@
             </div>
             <button type="submit" name="submit" class="btn btn-primary block full-width m-b">Login</button>
         </form>
-        <p class="m-t"> <small>Dobrishinov &copy; 2016</small> </p>
+        <p class="m-t"> <small>PGEE Plovdiv - <a href="http://dobrishinov.6tai.ga">Do.IT CMS</a> &copy; 2016</small> </p>
     </div>
 </div>
 
